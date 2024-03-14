@@ -1,0 +1,178 @@
+{
+    "results": [
+        {
+            "gender": "male",
+            "name": {
+                "title": "Mr",
+                "first": "Girindra",
+                "last": "Manjunath"
+            },
+            "location": {
+                "street": {
+                    "number": 3403,
+                    "name": "Bannerghatta Rd"
+                },
+                "city": "Tiruppur",
+                "state": "Manipur",
+                "country": "India",
+                "postcode": 60269,
+                "coordinates": {
+                    "latitude": "10.3561",
+                    "longitude": "-88.9070"
+                },
+                "timezone": {
+                    "offset": "+5:30",
+                    "description": "Bombay, Calcutta, Madras, New Delhi"
+                }
+            },
+            "email": "girindra.manjunath@example.com",
+            "login": {
+                "uuid": "67b50f98-a879-47dc-8613-7618379528c0",
+                "username": "bigduck539",
+                "password": "fuzzy",
+                "salt": "PFEKE2Wp",
+                "md5": "845388c5cfe5f7fd8c4e22502b6bf30e",
+                "sha1": "4ce849264185a83d8384b7758b471a27c40d8a27",
+                "sha256": "a244c5593d533283a790809a54bd5a6dbfc0fd8e2a2f4f8209bf3dcae6775a97"
+            },
+            "dob": {
+                "date": "1967-03-10T16:11:32.199Z",
+                "age": 56
+            },
+            "registered": {
+                "date": "2003-12-07T15:47:27.236Z",
+                "age": 20
+            },
+            "phone": "7453158057",
+            "cell": "7947821005",
+            "id": {
+                "name": "UIDAI",
+                "value": "059620316731"
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/53.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/53.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/53.jpg"
+            },
+            "nat": "IN"
+        },
+        {
+            "gender": "female",
+            "name": {
+                "title": "Miss",
+                "first": "Liepa",
+                "last": "Silden"
+            },
+            "location": {
+                "street": {
+                    "number": 315,
+                    "name": "Trosterudveien"
+                },
+                "city": "Bjertnestunet",
+                "state": "Hedmark",
+                "country": "Norway",
+                "postcode": "1178",
+                "coordinates": {
+                    "latitude": "11.4527",
+                    "longitude": "101.3994"
+                },
+                "timezone": {
+                    "offset": "+4:30",
+                    "description": "Kabul"
+                }
+            },
+            "email": "liepa.silden@example.com",
+            "login": {
+                "uuid": "3e7ce331-0819-4ea4-853a-c51cd8b0a0e0",
+                "username": "happyswan170",
+                "password": "sputnik",
+                "salt": "f3Ysi0qP",
+                "md5": "9789d6a91e039aa35a7d921193df1fec",
+                "sha1": "4d53d7767db0b0252338225286ebbe3f13fb85fb",
+                "sha256": "7c9d7bd865cdaeb95dd1ddad3741159b6fe26e655b863e3d797cf778be5ec927"
+            },
+            "dob": {
+                "date": "1946-08-15T22:00:54.881Z",
+                "age": 77
+            },
+            "registered": {
+                "date": "2010-08-10T23:09:20.081Z",
+                "age": 13
+            },
+            "phone": "66199871",
+            "cell": "92008686",
+            "id": {
+                "name": "FN",
+                "value": "15084601656"
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/women/33.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/women/33.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/33.jpg"
+            },
+            "nat": "NO"
+        },
+        {
+            "gender": "male",
+            "name": {
+                "title": "Mr",
+                "first": "Billy",
+                "last": "Dunn"
+            },
+            "location": {
+                "street": {
+                    "number": 42,
+                    "name": "Bruce St"
+                },
+                "city": "Chesapeake",
+                "state": "Alabama",
+                "country": "United States",
+                "postcode": 28513,
+                "coordinates": {
+                    "latitude": "-31.5083",
+                    "longitude": "-51.4046"
+                },
+                "timezone": {
+                    "offset": "-3:00",
+                    "description": "Brazil, Buenos Aires, Georgetown"
+                }
+            },
+            "email": "billy.dunn@example.com",
+            "login": {
+                "uuid": "1ed42f4a-d6d1-4065-aa2e-ecb2f410dbc9",
+                "username": "organiczebra815",
+                "password": "architec",
+                "salt": "UR9kENdu",
+                "md5": "5a4f0601b07e84b2e263d4d42b045538",
+                "sha1": "4f39f486d9b4f4b7a02c144a91cbc2783832de1c",
+                "sha256": "270ed25ed4af065f8d4e02eadc865e52c133e6ae8bbb9120c1ce00dca177826d"
+            },
+            "dob": {
+                "date": "1961-05-02T02:14:16.510Z",
+                "age": 62
+            },
+            "registered": {
+                "date": "2018-05-26T10:42:13.274Z",
+                "age": 5
+            },
+            "phone": "(457) 742-1230",
+            "cell": "(938) 397-2264",
+            "id": {
+                "name": "SSN",
+                "value": "664-44-6112"
+            },
+            "picture": {
+                "large": "https://randomuser.me/api/portraits/men/41.jpg",
+                "medium": "https://randomuser.me/api/portraits/med/men/41.jpg",
+                "thumbnail": "https://randomuser.me/api/portraits/thumb/men/41.jpg"
+            },
+            "nat": "US"
+        }
+    ],
+    "info": {
+        "seed": "3daddfe6debbe80c",
+        "results": 3,
+        "page": 1,
+        "version": "1.4"
+    }
+}
