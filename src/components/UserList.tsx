@@ -1,23 +1,13 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import { getUsers } from './services/users.js'
-import { type UserArr } from './types'
-
-function App() {
-  const [user, setUser] = useState<UserArr>([])
-  const getData = async () => {
-    try {
-      setUser(results)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  useEffect(() => {
-    getData().catch(console.error)
-  }, [])
+import { type UserArr } from '../types'
+interface Props {
+  sortedUsers: UserArr
+  color: boolean
+  handleDeleteClick: (email: string) => void
+}
+export function UserList({ sortedUsers, color, handleDeleteClick }: Props) {
   return (
     <>
-      <h1>Prueba Técnica</h1>
+
       <table width='100%'>
         <thead>
           <tr>
@@ -28,8 +18,8 @@ function App() {
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          {user.map(({ email, name, location, picture }) => {
+        <tbody className={color ? 'table--showColors' : ''}>
+          {sortedUsers.map(({ email, name, location, picture }) => {
             return (
               <tr key={email}>
                 <td>
@@ -39,7 +29,9 @@ function App() {
                 <td>{name.last}</td>
                 <td>{location.country}</td>
                 <td>
-                  <span>Borrar</span>
+                  <button onClick={() => handleDeleteClick(email)}>
+                    Borrar
+                  </button>
                 </td>
               </tr>
             )
@@ -49,5 +41,3 @@ function App() {
     </>
   )
 }
-
-export default App

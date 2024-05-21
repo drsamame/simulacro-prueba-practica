@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import './App.css'
 import { getUsers } from './services/users.js'
 import { type UserArr } from './types'
+import { UserList } from './components/UserList'
 
 function App() {
   const [user, setUser] = useState<UserArr>([])
@@ -9,15 +10,29 @@ function App() {
   const [filterWord, setFilterWord] = useState('')
   const [isSortedByCountry, setIsSortedByCountry] = useState<boolean>(false)
   const [color, setColor] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [currentPage, setCurrentPage] = useState(0)
 
   const getData = async () => {
-    const results = await getUsers()
-    usersCached.current = results
-    setUser(results)
+    setLoading(true)
+    setError(false)
+    try {
+      const results = await getUsers(currentPage)
+      setUser((prevState) => {
+        const newUsers = prevState.concat(results)
+        usersCached.current = newUsers
+        return newUsers
+      })
+    } catch (err) {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
   }
   useEffect(() => {
     getData().catch((e) => console.log(e))
-  }, [])
+  }, [currentPage])
 
   const handleClickColor = () => {
     setColor(!color)
@@ -77,36 +92,16 @@ function App() {
           placeholder='filtra por país'
         />
       </header>
-      <table width='100%'>
-        <thead>
-          <tr>
-            <th>Foto</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>País</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody className={color ? 'table--showColors' : ''}>
-          {sortedUsers.map(({ email, name, location, picture }) => {
-            return (
-              <tr key={email}>
-                <td>
-                  <img src={picture.thumbnail} alt='image thumbnail' />
-                </td>
-                <td>{name.first}</td>
-                <td>{name.last}</td>
-                <td>{location.country}</td>
-                <td>
-                  <button onClick={() => handleDeleteClick(email)}>
-                    Borrar
-                  </button>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      { loading && <p>Cargando</p> }
+      { error && <p>Ha habido un error</p> }
+      { !loading && !error && sortedUsers.length === 0 && <p>No hay data</p> }
+      { sortedUsers.length > 0 && <UserList
+        sortedUsers={sortedUsers}
+        color={color}
+        handleDeleteClick={handleDeleteClick}
+      />
+      }
+      {!loading && !error && <button onClick={() => setCurrentPage(currentPage + 1)}>Cargar mas resultados</button>}
     </>
   )
 }
