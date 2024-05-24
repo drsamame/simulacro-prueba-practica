@@ -15,7 +15,6 @@ export function UserList({ sortedUsers, color, handleDeleteClick }: Props) {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>País</th>
-            <th>Acciones</th>
           </tr>
         </thead>
         <tbody className={color ? 'table--showColors' : ''}>
@@ -29,9 +28,9 @@ export function UserList({ sortedUsers, color, handleDeleteClick }: Props) {
                 <td>{name.last}</td>
                 <td>{location.country}</td>
                 <td>
-                  <button onClick={() => handleDeleteClick(email)}>
+                  { /* <button onClick={() => handleDeleteClick(email)}>
                     Borrar
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             )

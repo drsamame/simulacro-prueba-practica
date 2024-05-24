@@ -33,6 +33,12 @@ module.exports = {
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/no-confusing-void-expression": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+              "checksVoidReturn": false
+            }
+          ]
     }
 }

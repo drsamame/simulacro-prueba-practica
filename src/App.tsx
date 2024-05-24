@@ -1,38 +1,14 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import './App.css'
-import { getUsers } from './services/users.js'
-import { type UserArr } from './types'
 import { UserList } from './components/UserList'
+import { Results } from './components/Results'
+import { useUsers } from './hooks/useUsers'
 
 function App() {
-  const [user, setUser] = useState<UserArr>([])
-  const usersCached = useRef<UserArr>([])
   const [filterWord, setFilterWord] = useState('')
   const [isSortedByCountry, setIsSortedByCountry] = useState<boolean>(false)
   const [color, setColor] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const [currentPage, setCurrentPage] = useState(0)
-
-  const getData = async () => {
-    setLoading(true)
-    setError(false)
-    try {
-      const results = await getUsers(currentPage)
-      setUser((prevState) => {
-        const newUsers = prevState.concat(results)
-        usersCached.current = newUsers
-        return newUsers
-      })
-    } catch (err) {
-      setError(true)
-    } finally {
-      setLoading(false)
-    }
-  }
-  useEffect(() => {
-    getData().catch((e) => console.log(e))
-  }, [currentPage])
+  const { isLoading, isError, users, fetchNextPage, refetch } = useUsers()
 
   const handleClickColor = () => {
     setColor(!color)
@@ -43,15 +19,11 @@ function App() {
   }
 
   const handleDeleteClick = (email: string) => {
-    setUser(
-      user?.filter((el) => {
-        return el.email !== email
-      })
-    )
+    //
   }
 
-  const handleClickReset = () => {
-    setUser(usersCached.current)
+  const handleClickReset = async () => {
+    await refetch()
   }
 
   const handleUserType: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -60,13 +32,13 @@ function App() {
 
   const filteredUsers = useMemo(() => {
     return filterWord.length > 0
-      ? [...user].filter((el) => {
+      ? [...users].filter((el) => {
           return el.location.country
             .toLowerCase()
             .includes(filterWord.toLowerCase())
         })
-      : [...user]
-  }, [user, filterWord, isSortedByCountry])
+      : [...users]
+  }, [users, filterWord, isSortedByCountry])
 
   const sortedUsers = useMemo(() => {
     if (isSortedByCountry) {
@@ -80,6 +52,7 @@ function App() {
   return (
     <>
       <h1>Prueba Técnica</h1>
+      <Results />
       <header>
         <button onClick={handleClickColor}>Colorear files</button>
         <button onClick={handleClickSort}>
@@ -92,16 +65,21 @@ function App() {
           placeholder='filtra por país'
         />
       </header>
-      { loading && <p>Cargando</p> }
-      { error && <p>Ha habido un error</p> }
-      { !loading && !error && sortedUsers.length === 0 && <p>No hay data</p> }
-      { sortedUsers.length > 0 && <UserList
-        sortedUsers={sortedUsers}
-        color={color}
-        handleDeleteClick={handleDeleteClick}
-      />
-      }
-      {!loading && !error && <button onClick={() => setCurrentPage(currentPage + 1)}>Cargar mas resultados</button>}
+      {isLoading && <p>Cargando</p>}
+      {!isLoading && isError && <p>Ha habido un error</p>}
+      {!isLoading && !isError && sortedUsers.length === 0 && <p>No hay data</p>}
+      {sortedUsers.length > 0 && (
+        <UserList
+          sortedUsers={sortedUsers}
+          color={color}
+          handleDeleteClick={handleDeleteClick}
+        />
+      )}
+      {!isLoading && !isError && (
+        <button onClick={async () => await fetchNextPage()}>
+          Cargar mas resultados
+        </button>
+      )}
     </>
   )
 }
